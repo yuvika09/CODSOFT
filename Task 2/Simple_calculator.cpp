@@ -1,3 +1,7 @@
+// Task 2:
+// Simple Calculator:
+
+
 #include <bits/stdc++.h>
 using namespace std;
 

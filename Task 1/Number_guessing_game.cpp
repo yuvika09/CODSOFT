@@ -1,41 +1,70 @@
 // Task 1:
 // Number guessing game:
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 int main()
 {
-    srand(time(0)); // add the random number generator
+    // add the random number generator
+    srand(time(0));
 
-    int randNum = rand() % 10 + 1; // generate a random number between 1 and 10
-
-    int guess, attempts = 0; // add variable to store values
-
-    cout << "Welcome to the Number Guessing Game! " << endl;
-    cout << endl;
+    // add variable to store values
+    int numberToGuess;
+    int userGuess;
+    int maximumGuesses, maximumToGuess;
+    bool won = false;
+    int keepGoing = 0;
 
     do
     {
-        cout << "Enter Your guess (between 1 and 10): " << endl;
-        cin >> guess;
+        cout << "What is the maximum number to guess: ";
+        cin >> maximumToGuess;
+        cout << "How many opportunities you want: ";
+        cin >> maximumGuesses;
 
-        // check if the guess is too high or too low
-        if (guess > randNum)
+        numberToGuess = rand() % maximumToGuess + 1;
+        // cout << "- - - - " << numberToGuess << " - - - -" << endl  << endl;
+
+        for (int i = 0; i < maximumGuesses; i++)
         {
-            cout << "Oops Sorry!! Try a smaller value. " << endl;
+            int guess;
+            cout << "Enter Your guess (between 1 and 10): " << endl;
+            cin >> guess;
+
+            // check if the guess is too high or too low
+            if (guess > numberToGuess)
+            {
+                cout << "Oops Sorry!! Try a smaller value. " << endl;
+            }
+            else if (guess < numberToGuess)
+            {
+                cout << "Oops Sorry!! Try a larger value. " << endl;
+            }
+            else
+            {
+                won = true;
+                break;
+            }
         }
-        else if (guess < randNum)
+
+        if (won)
         {
-            cout << "Oops Sorry!! Try a larger value. " << endl;
+            cout << "You are a Winner!!!" << endl;
         }
+        else
+        {
+            cout << "Sorry! You lose." << endl;
+        }
+        cout << "Would you like to play another game? [1 for yes]: ";
+        cin >> keepGoing;
 
-        attempts++; // keep track of the no. of attempts
+    } while (keepGoing == 1);
 
-    } while (guess != randNum);
-
-    cout << "Congratulations! You guessed the number in " << attempts << " attempts." << endl;
-    cout << endl;
+    cout << "Thanks for playing my game" << endl;
 
     return 0;
 }
